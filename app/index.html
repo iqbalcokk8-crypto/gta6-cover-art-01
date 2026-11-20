@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunset Coast — Cover Studio</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">SC</span>
+    <div><h1>Sunset Coast <span>Cover Studio</span></h1>
+    <p>Your photo + a caption &rarr; a multi-panel poster cover. Photos never leave your machine.</p></div>
+  </div>
+  <div class="top-actions">
+    <button id="undo" type="button" title="Undo (Ctrl+Z)">&#8617; Undo</button>
+    <button id="redo" type="button" title="Redo (Ctrl+Y)">&#8618; Redo</button>
+  </div>
+</header>
+<main class="app">
+  <aside class="controls" aria-label="Cover controls">
+    <section>
+      <h2>1 &middot; Photos</h2>
+      <label class="file-label">Add your photos
+        <input id="photos" type="file" accept="image/*" multiple>
+      </label>
+      <div id="samples" class="samples" aria-label="Sample scenes"></div>
+      <p class="hint">Click a photo, then click a panel in the preview to put it there. Drag a panel to move its photo, scroll over it to zoom.</p>
+    </section>
+    <section>
+      <h2>2 &middot; Layout</h2>
+      <div id="layouts" class="chip-row" role="group" aria-label="Layout"></div>
+    </section>
+    <section>
+      <h2>3 &middot; Colour grade</h2>
+      <div id="grades" class="chip-row" role="group" aria-label="Colour grade"></div>
+    </section>
+    <section>
+      <h2>4 &middot; Caption</h2>
+      <label>Title <input id="title" type="text" maxlength="28" value="SUNSET HEIST"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="48" value="a Sunset Coast story"></label>
+      <label>Badge <input id="badge" type="text" maxlength="24" value="EST. 2026"></label>
+      <label>Heat <span id="heatValue">4 / 5</span>
+        <input id="heat" type="range" min="1" max="5" step="1" value="4">
+      </label>
+    </section>
+    <section>
+      <h2>5 &middot; Selected panel</h2>
+      <p class="hint" id="panelLabel">Panel 1 of 4 &mdash; click any panel in the preview.</p>
+      <label>Photo in this panel <select id="panelPhoto"></select></label>
+      <label>Name tag <input id="panelTag" type="text" maxlength="24" placeholder="Role for this panel"></label>
+      <label>Zoom <input id="panelZoom" type="range" min="1" max="3" step="0.01" value="1.15"></label>
+      <label>Move left / right <input id="panelOx" type="range" min="-1" max="1" step="0.01" value="0"></label>
+      <label>Move up / down <input id="panelOy" type="range" min="-1" max="1" step="0.01" value="0"></label>
+      <div class="row">
+        <button id="fillAll" type="button">Fill all panels with this photo</button>
+        <button id="shuffle" type="button">Shuffle photos</button>
+      </div>
+    </section>
+    <section>
+      <h2>6 &middot; Export</h2>
+      <label>Post size
+        <select id="size">
+          <option value="square">Square &mdash; 1080 x 1080</option>
+          <option value="portrait">Portrait &mdash; 1080 x 1350</option>
+          <option value="wide">Landscape &mdash; 1920 x 1080</option>
+        </select>
+      </label>
+      <div class="row">
+        <button id="export" type="button" class="primary">Export PNG</button>
+        <button id="exportAll" type="button">Export all 3 sizes</button>
+      </div>
+      <label class="check"><input id="grain" type="checkbox" checked> Film grain + vignette</label>
+      <label class="check"><input id="frame" type="checkbox" checked> White poster frame</label>
+      <p id="status" role="status"></p>
+    </section>
+  </aside>
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+    <p class="hint">Live preview &mdash; the PNG exports at full post size.</p>
+    <p id="shotOutput" hidden></p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
